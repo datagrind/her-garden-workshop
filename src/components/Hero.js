@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { Button } from "./Buttons";
+import { Button } from "./Button";
 import Syringa from "../assets/videos/syringa_blossoms_panning.mp4";
 
 const Hero = () =>{

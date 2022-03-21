@@ -3,7 +3,7 @@ import { Link } from "gatsby"
 import styled from "styled-components"
 import {FaBars} from "react-icons/fa"
 import { menuData } from "../data/MenuData"
-import { Button } from "./Buttons"
+import { Button } from "./Button"
 
 const Header = () => {
   return (
