@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components"
 import { useStaticQuery, graphql } from 'gatsby'
 import Img from 'gatsby-image'
-import Button from './Button'
+import { Button } from './Button'
 import { ImLocation } from "react-icons/im"
 
 const Workshop = ({ heading }) => {
@@ -48,8 +48,8 @@ const Workshop = ({ heading }) => {
                             round="true" 
                             css={ `
                                 position: absolute; 
-                                top: 420px f
-                                ont-size: 14px
+                                top: 420px; 
+                                font-size: 14px;
                             `}
                         >
                             { item.node.button }
@@ -84,17 +84,17 @@ const ProductsHeading = styled.div`
 `
 const ProductsWrapper = styled.div`
     display: grid;
-    grid-template-columns: repeat(4,1fr);
+    grid-template-columns: repeat(3,1fr);
     grid-gap: 10px;
     justify-items: center;
     padding: 0 2rem;
 
     @media screen and (max-width: 1200px) {
-        grid-templte-columns: 1fr 1fr;
+        grid-tempalte-columns: 1fr 1fr;
     }
 
-    @media screen and (max-width: 868ox) {
-        grid-templte-columns: 1fr;
+    @media screen and (max-width: 868px) {
+        grid-template-columns: 1fr;
     }
 `
 
@@ -103,7 +103,7 @@ const ProductsCard = styled.div`
     width: 100%;
     height: 500px;
     position: relative;
-    border-radius: 2px;
+    border-radius: 10px;
     transition: 0.2s ease;
 `
 
