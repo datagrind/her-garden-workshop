@@ -2,6 +2,7 @@ import * as React from "react"
 import Hero from "../components/Hero"
 import Layout from "../components/layout"
 import Seo from "../components/seo"
+import Testimonials from "../components/Testimonials"
 import Workshop from "../components/Workshop"
 
 // Ivory#FFBF00, green #A8AAA1, gold #BBA55D
@@ -14,6 +15,7 @@ const IndexPage = () => (
     <Seo title="Home" />
     <Hero/>
     <Workshop heading="Workshop"/>
+    <Testimonials />
   </Layout>
 )
 

@@ -33,7 +33,6 @@ const Workshop = ({ heading }) => {
             workshopArray.push(
                 <ProductsCard key = { index }>
                     <ProductsImg 
-                        src={ item.node.img.childImageSharp.fluid.src }
                         alt ={ item.node.alt}
                         fluid = { item.node.img.childImageSharp.fluid } 
                     />
