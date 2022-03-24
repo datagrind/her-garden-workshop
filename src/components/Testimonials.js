@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState, useEffect } from "react"
 import styled from "styled-components"
 import Img from "gatsby-image"
 import { IoMdCheckmarkCircleOutline } from "react-icons/io"
@@ -8,7 +8,6 @@ import { graphql, useStaticQuery } from "gatsby"
 
 const Testimonials = () => {
 
-    
     const data = useStaticQuery(graphql`
         query MyQuery {
             allFile(
@@ -26,6 +25,19 @@ const Testimonials = () => {
             }
         }
     `)
+    const [photos, setPhotos] = useState(data);
+
+    const [comments, setComments] = useState([]);
+
+    
+    
+    useEffect(() => {
+        setComments( comment );
+    }, [])
+
+    useEffect(() => 
+        setPhotos( data )
+    , [])
 
     const comment = [
         {
@@ -54,14 +66,14 @@ const Testimonials = () => {
         }
     ]
 
-    const mapPhotos = data.allFile.edges.map((image,key) => (
+    const mapPhotos = photos.allFile.edges.map((image,key) => (
         <Images 
             key={ key } 
             fluid={ image.node.childImageSharp.fluid }
         />
     )); 
 
-    const mapComments = comment.map((com, key) =>(
+    const mapComments = comments.map((com, key) =>(
         <>
             <h3 key={ "h3"+key }>{ com.name }</h3>
             <p key={ "p"+key }>{ com.comment }</p>

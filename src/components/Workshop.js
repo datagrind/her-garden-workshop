@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState }from "react";
 import styled from "styled-components"
 import { useStaticQuery, graphql } from 'gatsby'
 import Img from 'gatsby-image'
@@ -26,44 +26,46 @@ const Workshop = ({ heading }) => {
             }
         }
     `)
+    
+    const [photos, setPhotos] = useState( data );
 
-    function getWorkshop(data) {
-        const workshopArray = []
-        data.allWorkshopJson.edges.forEach((item, index) => {
-            workshopArray.push(
-                <ProductsCard key = { index }>
-                    <ProductsImg 
-                        alt ={ item.node.alt}
-                        fluid = { item.node.img.childImageSharp.fluid } 
-                    />
-                    <ProductsInfo>
-                        <TextWrap>
-                            <ImLocation/>
-                            <ProductsTitle>{ item.node.name }</ProductsTitle>
-                        </TextWrap>
-                        <Button 
-                            to="/workshop" 
-                            primary="true" 
-                            round="true" 
-                            css={ `
-                                position: absolute; 
-                                top: 420px; 
-                                font-size: 14px;
-                            `}
-                        >
-                            { item.node.button }
-                        </Button>
-                    </ProductsInfo>
-                </ProductsCard>
-            )
-        })
-        return workshopArray;
+    const mapPhotos = photos.allWorkshopJson.edges.map((photo)=>(
+        photo
+    ));
+
+    function getWorkshop() {
+        return mapPhotos.map((item, index) => (
+            <ProductsCard key = { index }>
+                <ProductsImg 
+                    alt ={ item.node.alt}
+                    fluid = { item.node.img.childImageSharp.fluid } 
+                />
+                <ProductsInfo>
+                    <TextWrap>
+                        <ImLocation/>
+                        <ProductsTitle>{ item.node.name }</ProductsTitle>
+                    </TextWrap>
+                    <Button 
+                        to="/workshop" 
+                        primary="true" 
+                        round="true" 
+                        css={ `
+                            position: absolute; 
+                            top: 420px; 
+                            font-size: 14px;
+                        `}
+                    >
+                        { item.node.button }
+                    </Button>
+                </ProductsInfo>
+            </ProductsCard>
+        ));
     }
 
     return (
         <ProductsContainer>
             <ProductsHeading>{ heading }</ProductsHeading>
-            <ProductsWrapper>{ getWorkshop(data) }</ProductsWrapper>
+            <ProductsWrapper>{ getWorkshop() }</ProductsWrapper>
         </ProductsContainer>
     )
 }

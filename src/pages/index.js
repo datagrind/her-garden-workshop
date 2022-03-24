@@ -2,8 +2,10 @@ import * as React from "react"
 import Hero from "../components/Hero"
 import Layout from "../components/layout"
 import Seo from "../components/seo"
+import Store from "../components/Store"
 import Testimonials from "../components/Testimonials"
 import Workshop from "../components/Workshop"
+
 
 // Ivory#FFBF00, green #A8AAA1, gold #BBA55D
 //floral store to sell single, seasonal bouquet, or floral subsciption plan/ page for workshop/ contact page for custom order/ link facebook to site/ philanthropy
@@ -16,6 +18,7 @@ const IndexPage = () => (
     <Hero/>
     <Workshop heading="Workshop"/>
     <Testimonials />
+    <Store />
   </Layout>
 )
 
