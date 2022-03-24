@@ -25,7 +25,7 @@ const Testimonials = () => {
             }
         }
     `)
-    const [photos, setPhotos] = useState(data);
+    const [photos] = useState(data);
 
     const [comments, setComments] = useState([]);
     
