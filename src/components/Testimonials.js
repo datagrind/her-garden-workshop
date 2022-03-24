@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react"
+import React, { useState, useEffect, useMemo } from "react"
 import styled from "styled-components"
 import Img from "gatsby-image"
 import { IoMdCheckmarkCircleOutline } from "react-icons/io"
@@ -28,48 +28,41 @@ const Testimonials = () => {
     const [photos, setPhotos] = useState(data);
 
     const [comments, setComments] = useState([]);
-
     
-    
-    useEffect(() => {
-        setComments( comment );
-    }, [])
-
-    useEffect(() => 
-        setPhotos( data )
-    , [])
-
-    const comment = [
-        {
-            "name": "Ntxoo Lee"
-            ,"comment": 
-                <p>
-                    "My sister's and I had a wonderful experience at Her's Garden Workshop. 
-                    Melanie is an amazing host and organizer. She knows her succulent species, 
-                    she'll educate how to care for your succulents before leaving her workshop. 
-                    I highly recommend Her's Garden Workshop to everyone, whether it's a get together 
-                    or things to do in town with families and friends.
-                    <br/>
-                    <br/>
-                    Thank you Melanie 😊 💓"
-                </p>
-        }
-        ,{
-            "name": "Ka Xiong"
-            ,"comment": 
-                <p>
-                    "The workshop was so much fun and so relaxing! 
-                    Melanie does a great at teaching you everything that there is to know 
-                    about your plants. Her workshops are a must do with your family and friends! 
-                    Will definitely be going back and doing another workshop soon!"
-                </p>
-        }
-    ]
+   
+    const memoComment = useMemo(() => 
+        [
+            {
+                "name": "Ntxoo Lee"
+                ,"comment": 
+                    <p>
+                        "My sister's and I had a wonderful experience at Her's Garden Workshop. 
+                        Melanie is an amazing host and organizer. She knows her succulent species, 
+                        she'll educate how to care for your succulents before leaving her workshop. 
+                        I highly recommend Her's Garden Workshop to everyone, whether it's a get together 
+                        or things to do in town with families and friends.
+                        <br/>
+                        <br/>
+                        Thank you Melanie 😊 💓"
+                    </p>
+            }
+            ,{
+                "name": "Ka Xiong"
+                ,"comment": 
+                    <p>
+                        "The workshop was so much fun and so relaxing! 
+                        Melanie does a great at teaching you everything that there is to know 
+                        about your plants. Her workshops are a must do with your family and friends! 
+                        Will definitely be going back and doing another workshop soon!"
+                    </p>
+            }
+        ]
+    , []);
 
     const mapPhotos = photos.allFile.edges.map((image,key) => (
         <Images 
             key={ key } 
-            fluid={ image.node.childImageSharp.fluid }
+            fluid={ image.node.childImageSharp.fluid } 
         />
     )); 
 
@@ -80,45 +73,56 @@ const Testimonials = () => {
         </>
     ));
 
+    useEffect(() => {
+        setComments( memoComment );
+    }, [memoComment,data])
+
+    
+    if (photos){
+        return (
+            <TestimonialsContainer>
+                <TopLine>
+                    Testimonials
+                </TopLine>
+                <Description>
+                    What People Are Saying
+                </Description>
+                <ContentWrapper>
+                    <ColumnOne>
+                        <Testimonial>
+                            <IoMdCheckmarkCircleOutline 
+                                css={`
+                                    color: #3fffa8;
+                                    font-size: 2rem;
+                                    margin-bottom: 1rem;
+                                `}
+                            />
+                            { mapComments[0] }
+                            { console.log(mapComments.length + "from mapComments") }
+                        </Testimonial>
+                        <Testimonial>
+                            <FaRegLightbulb 
+                                css={`
+                                    color: #f9b19b;
+                                    font-size: 2rem;
+                                    margin-bottom: 1rem;
+                                `}
+                            />
+                            { mapComments[1] }
+                        </Testimonial>
+                    </ColumnOne>
+                    <ColumnTwo>
+                        { mapPhotos }
+                    </ColumnTwo>
+                </ContentWrapper>
+            </TestimonialsContainer>
+        )
+    }
     return (
-        <TestimonialsContainer>
-            <TopLine>
-                Testimonials
-            </TopLine>
-            <Description>
-                What People Are Saying
-            </Description>
-            <ContentWrapper>
-                <ColumnOne>
-                    <Testimonial>
-                        <IoMdCheckmarkCircleOutline 
-                            css={`
-                                color: #3fffa8;
-                                font-size: 2rem;
-                                margin-bottom: 1rem;
-                            `}
-                        />
-                        { mapComments[0] }
-                        { console.log(mapComments.length + "from mapComments") }
-                    </Testimonial>
-                    <Testimonial>
-                        <FaRegLightbulb 
-                            css={`
-                                color: #f9b19b;
-                                font-size: 2rem;
-                                margin-bottom: 1rem;
-                            `}
-                        />
-                        { mapComments[1] }
-                    </Testimonial>
-                </ColumnOne>
-                <ColumnTwo>
-                    { mapPhotos }
-                </ColumnTwo>
-            </ContentWrapper>
-        </TestimonialsContainer>
+        <div>Testimonials</div>
     )
 }
+    
 
 export default Testimonials;
 
