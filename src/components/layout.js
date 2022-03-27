@@ -6,7 +6,7 @@ const Layout = ({ children }) => {
   return (
     <>
       <GlobalStyle />
-      <Header />
+      <Header css={`position:sticky; top:0;`}/>
       <main>{children}</main>
     </>
   )

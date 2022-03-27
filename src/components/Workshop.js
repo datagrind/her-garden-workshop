@@ -4,6 +4,7 @@ import { useStaticQuery, graphql } from 'gatsby'
 import Img from 'gatsby-image'
 import { Button } from './Button'
 import { ImLocation } from "react-icons/im"
+import { onExpandCard } from "./scripts/ExpandCards";
 
 const Workshop = ({ heading }) => {
     const data = useStaticQuery(graphql`
@@ -35,7 +36,11 @@ const Workshop = ({ heading }) => {
 
     function getWorkshop() {
         return mapPhotos.map((item, index) => (
-            <ProductsCard key = { index }>
+            <ProductsCard 
+                key = { index } 
+                className={ (index==0)?"panel active":"panel" }  
+                onClick={ onExpandCard }
+            >
                 <ProductsImg 
                     alt ={ item.node.alt}
                     fluid = { item.node.img.childImageSharp.fluid } 
@@ -48,10 +53,11 @@ const Workshop = ({ heading }) => {
                     <Button 
                         to="/workshop" 
                         primary="true" 
-                        round="true" 
+                        round="true"  
                         css={ `
                             position: absolute; 
-                            top: 420px; 
+                            bottom: 20px; 
+                            left: 20px;
                             font-size: 14px;
                         `}
                     >
@@ -76,6 +82,25 @@ const ProductsContainer = styled.div`
     min-height: 100vh;
     padding: 5rem calc((100vw - 1300px)/2);
     color:#fff;
+
+    .panel {
+        background-size: auto 100%;
+        background-position: center;
+        background-repeat: no-repeat;
+        height: 100vh;
+        width: 100%;
+        // color: white;
+        cursor: pointer;
+        border-radius: 50px;
+        flex: 1;
+        margin: 10px;
+        transition: flex 0.7s ease-in;
+    }
+      
+    .panel.active {
+        flex: 3;
+    }
+
 `
 const ProductsHeading = styled.div`
     font-size: clamp(1.2rem, 5vw, 3rem);
@@ -84,19 +109,13 @@ const ProductsHeading = styled.div`
     color: #000;
 `
 const ProductsWrapper = styled.div`
-    display: grid;
-    grid-template-columns: repeat(3,1fr);
-    grid-gap: 10px;
+    display: flex;
     justify-items: center;
     padding: 0 2rem;
 
-    @media screen and (max-width: 1200px) {
-        grid-tempalte-columns: 1fr 1fr;
-    }
-
-    @media screen and (max-width: 868px) {
-        grid-template-columns: 1fr;
-    }
+    // @mobile screen {
+    //     display: block;
+    // }
 `
 
 const ProductsCard = styled.div`
@@ -109,6 +128,7 @@ const ProductsCard = styled.div`
 `
 
 const ProductsImg = styled(Img)`
+    // display: block;  
     height: 100%;
     max-width: 100%;
     position: relative;
@@ -127,7 +147,7 @@ const ProductsInfo = styled.div`
     align-items: flex-start;
     padding: 0 2rems;
 
-    @media screen and (max-width: 280px){
+    @media screen and (max-width: 375px){
         padding: 0 1rem;
     }
 `

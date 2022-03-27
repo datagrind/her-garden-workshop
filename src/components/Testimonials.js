@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useMemo } from "react"
 import styled from "styled-components"
 import Img from "gatsby-image"
-import { IoMdCheckmarkCircleOutline } from "react-icons/io"
 import { FaRegLightbulb } from "react-icons/fa"
 import { graphql, useStaticQuery } from "gatsby"
 
@@ -25,7 +24,7 @@ const Testimonials = () => {
             }
         }
     `)
-    const [photos] = useState(data);
+    const [photos, setPhotos] = useState(data);
 
     const [comments, setComments] = useState([]);
     
@@ -90,13 +89,6 @@ const Testimonials = () => {
                 <ContentWrapper>
                     <ColumnOne>
                         <Testimonial>
-                            <IoMdCheckmarkCircleOutline 
-                                css={`
-                                    color: #3fffa8;
-                                    font-size: 2rem;
-                                    margin-bottom: 1rem;
-                                `}
-                            />
                             { mapComments[0] }
                             { console.log(mapComments.length + "from mapComments") }
                         </Testimonial>
