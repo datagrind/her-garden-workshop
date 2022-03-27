@@ -6,4 +6,4 @@ Contents of website:
   - Charitable sponsorships
   - Articles
   - About Us
-![landing page of Her Garden Workshop](https://i.makeagif.com/media/3-27-2022/n8pbk6.gif)
+  - ![landing page of Her Garden Workshop](https://i.makeagif.com/media/3-27-2022/n8pbk6.gif)
